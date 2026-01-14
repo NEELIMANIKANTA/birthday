@@ -1,0 +1,384 @@
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Rouge+Script&display=swap");
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.candle-container, .plate, .wrapper {
+  display: grid;
+  place-items: center;
+}
+
+.wrapper {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  background: linear-gradient(to top, #eee, transparent);
+  overflow: hidden;
+}
+
+.greeting {
+  font-family: "Cookie", cursive;
+  font-size: 4rem;
+  color: #444;
+  transform: scale(0);
+  margin-bottom: 60px;
+}
+
+.cut-cake-btn {
+  font-family: "Cookie", cursive;
+  font-size: 2.1rem;
+  color: #fff;
+  background: linear-gradient(135deg, #b381ae, #9e7199);
+  border: none;
+  border-radius: 50px;
+  padding: 15px 40px;
+  margin-top: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(158, 113, 153, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1000;
+}
+
+.cut-cake-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(158, 113, 153, 0.6);
+  background: linear-gradient(135deg, #c5a5c0, #b381ae);
+}
+
+.cut-cake-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(158, 113, 153, 0.4);
+}
+
+.cut-cake-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.plate {
+  position: relative;
+  width: 250px;
+  height: 75px;
+  background: #f1f1f1;
+  margin-top: 100px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 5px 0px #aaa;
+}
+
+.cake-wrap {
+  position: absolute;
+  bottom: 50%;
+}
+
+.cake-base {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  background: #c5a5c0;
+}
+.cake-base .base-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+}
+.cake-base .base-front:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 55px;
+  transform: translatey(-50%);
+  background: inherit;
+  border-radius: 50%;
+}
+.cake-base .base-top {
+  position: absolute;
+  width: 100%;
+  height: 65px;
+  top: 0;
+  transform: translatey(-50%);
+  border-radius: 50%;
+  background: inherit;
+}
+.cake-base .base-top:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  clip-path: polygon(0 0, 0% 50%, 100% 50%, 100% 0);
+}
+.cake-base .base-top:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border-bottom-color: black;
+  clip-path: polygon(0 50%, 60% 50%, 60% 101%, 0 101%);
+}
+
+.cake-topping {
+  position: absolute;
+  bottom: 0%;
+  width: 200px;
+  height: 100px;
+  z-index: 99;
+}
+.cake-topping .topping-front {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #b381ae 40%, transparent);
+}
+.cake-topping .topping-front .top-layer {
+  height: 30%;
+  background: #b381ae;
+}
+.cake-topping .topping-front .bottom-layer {
+  position: relative;
+  height: 70%;
+  background: #b381ae;
+  clip-path: url("#my-clip-path");
+}
+.cake-topping .topping-top {
+  background: #b381ae;
+  position: absolute;
+  width: 100%;
+  height: 65px;
+  top: 0;
+  transform: translatey(-50%);
+  border-radius: 50%;
+  z-index: 9;
+}
+.cake-topping .topping-top:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  clip-path: polygon(0 0, 0% 50%, 100% 50%, 100% 0);
+}
+.cake-topping .topping-top:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 -1px 1px 2px rgba(200, 169, 195, 0.5);
+  clip-path: polygon(10% 50%, 70% 50%, 70% 101%, 10% 101%);
+}
+
+.candle-container {
+  width: 200px;
+  position: absolute;
+  bottom: 60%;
+  z-index: 9999;
+  opacity: 0;
+}
+.candle-container .candle-wrap {
+  position: relative;
+  width: 15px;
+}
+.candle-container .flame-wrap {
+  position: relative;
+  z-index: 99;
+  width: 100%;
+  background: #fcc56c;
+  height: 30px;
+  transform-origin: bottom center;
+  transform: scale(0);
+  clip-path: url(#my-flame-path);
+}
+.candle-container .candle-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translatey(-50%);
+  width: 100%;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  z-index: 9;
+  background: radial-gradient(#eee, #f0abf0);
+}
+.candle-container .candle-base {
+  position: relative;
+  width: 100%;
+  height: 75px;
+  margin: 2px 0;
+  background: repeating-linear-gradient(45deg, #eee, #f0abf0 20%);
+}
+.candle-container .candle-base:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #eee;
+  transform: translateY(50%);
+  height: 5px;
+  width: 100%;
+  z-index: -1;
+  border-radius: 50%;
+}
+.candle-container .candle-base:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  height: 10px;
+  width: 200%;
+  border-radius: 50%;
+  background: radial-gradient(#9e7199, #b381ae);
+  z-index: -2;
+}
+.candle-container .star {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  background-color: orange;
+  clip-path: url(#my-star-path);
+  opacity: 0;
+}
+.candle-container .star:nth-of-type(1) {
+  top: -20%;
+  left: 30%;
+}
+.candle-container .star:nth-of-type(2) {
+  top: 30%;
+  left: 10%;
+}
+.candle-container .star:nth-of-type(3) {
+  top: -10%;
+  left: 85%;
+}
+.candle-container .star:nth-of-type(4) {
+  top: 35%;
+  left: 65%;
+}
+.candle-container .star:nth-of-type(5) {
+  top: 55%;
+  left: 90%;
+}
+
+/* Cake piece that gets cut */
+.cake-piece {
+  position: absolute;
+  background: linear-gradient(to bottom, #b381ae, #c5a5c0);
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  transform-origin: center;
+  z-index: 100;
+}
+
+/* Celebration message */
+.celebration {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Cookie", cursive;
+  font-size: 3rem;
+  color: #b381ae;
+  opacity: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Crumb animation */
+.crumb {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: 101;
+}
+
+/* Add to the existing CSS file */
+
+/* Confetti animation */
+.confetti {
+  pointer-events: none;
+}
+
+/* Surprise button styles */
+.surprise-btn {
+  font-family: "Cookie", cursive !important;
+  font-size: 2.5rem !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 20px 50px !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* .surprise-btn:hover {
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6) !important;
+  background: linear-gradient(135deg, #ff8e53, #ff6b6b) !important;
+}
+
+.surprise-btn:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4) !important;
+} */
+
+/* Smoke effect for candle blow out */
+.smoke {
+  pointer-events: none;
+  animation: smoke-dissipate 2s ease-out forwards;
+}
+
+@keyframes smoke-dissipate {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(var(--x, 0), var(--y, -100px)) scale(2);
+    opacity: 0;
+  }
+}
+
+/* Dialog container styles */
+.dialog-container {
+  backdrop-filter: blur(5px);
+  border: 3px solid #ff8e53;
+}
+
+.question-text {
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.dialog-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dialog-option:active {
+  transform: translateY(1px) !important;
+}
+
+/* Just kidding animation */
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.just-kidding {
+  animation: pulse 1.5s ease-in-out infinite;
+}
